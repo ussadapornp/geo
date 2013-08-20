@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Device Properties Example</title>
+    <title>Notification Example</title>
 
     <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
     <script type="text/javascript" charset="utf-8">
@@ -13,33 +13,36 @@
     // device APIs are available
     //
     function onDeviceReady() {
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        // Empty
     }
 
-    // onSuccess Geolocation
+    // Show a custom alert
     //
-    function onSuccess(position) {
-        var element = document.getElementById('geolocation');
-        element.innerHTML = 'Latitude: '          + position.coords.latitude         + '<br />' +
-                            'Longitude: '         + position.coords.longitude        + '<br />' +
-                            'Altitude: '          + position.coords.altitude         + '<br />' +
-                            'Accuracy: '          + position.coords.accuracy         + '<br />' +
-                            'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '<br />' +
-                            'Heading: '           + position.coords.heading          + '<br />' +
-                            'Speed: '             + position.coords.speed            + '<br />' +
-                            'Timestamp: '         + position.timestamp               + '<br />';
+    function showAlert() {
+        navigator.notification.alert(
+            'You are the winner!',  // message
+            'Game Over',            // title
+            'Done'                  // buttonName
+        );
     }
 
-        // onError Callback receives a PositionError object
-        //
-        function onError(error) {
-            alert('code: '    + error.code    + '\n' +
-                  'message: ' + error.message + '\n');
-        }
+    // Beep three times
+    //
+    function playBeep() {
+        navigator.notification.beep(3);
+    }
+
+    // Vibrate for 2 seconds
+    //
+    function vibrate() {
+        navigator.notification.vibrate(2000);
+    }
 
     </script>
   </head>
   <body>
-    <p id="geolocation">Finding geolocation...</p>
+    <p><a href="#" onclick="showAlert(); return false;">Show Alert</a></p>
+    <p><a href="#" onclick="playBeep(); return false;">Play Beep</a></p>
+    <p><a href="#" onclick="vibrate(); return false;">Vibrate</a></p>
   </body>
 </html>
